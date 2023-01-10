@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Quản lý danh mục</title>
+    <th:block th:replace="admin/admin-fragments::stylesheet"></th:block>
+</head>
+
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <th:block th:replace="admin/admin-fragments::header-side-bar"></th:block>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Danh mục sản phẩm</h1>
+                    <div class="section-header-button">
+                        <a href="doanh-muc/them" class="btn btn-primary">Thêm danh mục mới</a>
+                    </div>
+                    <div class="section-header-breadcrumb">
+                        <div class="breadcrumb-item active"><a href="/admin/dashboard">Dashboard</a></div>
+                        <div class="breadcrumb-item"><a href="/admin/doanh-muc">Danh mục</a></div>
+                    </div>
+                </div>
+                <div class="section-body">
+                    <h2 class="section-title">Doanh mục sản phẩm</h2>
+                    <p class="section-lead">
+                        Có thể quản lý và xem doanh mục trong hệ thống
+                    </p>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Tất cả doanh mục</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="float-right">
+                                        <form>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Search">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary"><i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="clearfix mb-3"></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <th class="text-center pt-2">
+                                                    <div class="custom-checkbox custom-checkbox-table custom-control">
+                                                    </div>
+                                                </th>
+                                                <th>Ảnh</th>
+                                                <th>Tên doanh mục</th>
+                                                <th>Số lượng sản phẩm</th>
+                                                <th>Ngày cập nhật</th>
+                                            </tr>
+                                            <tr th:each="c: ${categories}">
+                                                <td>
+                                                    <div class="custom-checkbox custom-control">
+
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="#">
+                                                        <img alt="image" th:src="${c.images}" class="rounded-circle"
+                                                             width="35"
+                                                             data-toggle="title" title="">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    [[${c.name}]]
+                                                    <div class="table-links">
+                                                        <a th:href="@{/doanh-muc(name=${c.name})}">View</a>
+                                                        <div class="bullet"></div>
+                                                        <a th:href="@{/admin/doanh-muc/chinh-sua(id=${c.categoryId})}">Edit</a>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <a href="" th:text="${c.product.size()}"></a>
+                                                </td>
+
+                                                <td th:text="${#dates.format(c.updateDate, 'dd/MM/yyyy')}"></td>
+
+                                        </table>
+                                    </div>
+                                    <div class="float-right">
+                                        <nav>
+                                            <ul class="pagination">
+                                                <th:block th:each="i:${#numbers.sequence(0, numPage)}">
+                                                    <li class="page-item" th:classappend="${i == page} ? active ">
+                                                        <a class="page-link" th:href="@{/admin/doanh-muc(page=${i+1})}">
+                                                            [[${i+1}]]
+                                                        </a>
+                                                    </li>
+                                                </th:block>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="admin/admin-fragments::script-link"></th:block>
+
+<!-- Page Specific JS File -->
+<script src="/js/page/features-posts.js"></script>
+
+</body>
+
+</html>
