@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/modules/fontawesome/css/all.min.css">
 
     <!-- CSS Libraries -->
+    <link rel="stylesheet" href="/modules/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="/modules/jqvmap/dist/jqvmap.min.css">
     <link rel="stylesheet" href="/modules/summernote/summernote-bs4.css">
     <link rel="stylesheet" href="/modules/owlcarousel2/dist/owl.carousel.min.css">
@@ -199,54 +200,60 @@
     <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
-                <a href="index.html">TDA Store</a>
+                <a href="/admin">TDA Store</a>
             </div>
             <div class="sidebar-brand sidebar-brand-sm">
-                <a href="index.html">TDA</a>
+                <a href="/admin">TDA</a>
             </div>
             <ul class="sidebar-menu">
                 <li class="menu-header">Dashboard</li>
                 <li class="active">
-                    <a href="#" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                    <a href="/admin/dashboard" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 </li>
                 <li class="menu-header">Quản lý</li>
-                <li class="dropdown">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
+
+                <li>
+                    <a href="/admin/doanh-muc" class="nav-link">
                         <i class="fas fa-columns"></i>
                         <span>Doanh mục</span>
                     </a>
                 </li>
 
-                <li><a class="nav-link" href="blank.html"><i class="fa fa-box"></i> <span>Sản phẩm</span></a></li>
+                <li>
+                    <a class="nav-link" href="/admin/san-pham">
+                        <i class="fa fa-box"></i>
+                        <span>Sản phẩm</span>
+                    </a>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="nav-link has-dropdown"><i class="fa fa-cart-plus"></i> <span>Đơn hàng</span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="nav-link" href="bootstrap-alert.html">Chưa xử lý</a></li>
-                        <li><a class="nav-link" href="bootstrap-badge.html">Đang vận chuyển</a></li>
-                        <li><a class="nav-link" href="bootstrap-breadcrumb.html">Hoàn tất</a></li>
+                        <li><a class="nav-link" href="/admin/san-pham?status=pending">Chưa xử lý</a></li>
+                        <li><a class="nav-link" href="/admin/san-pham?status=shipping">Đang vận chuyển</a></li>
+                        <li><a class="nav-link" href="/admin/san-pham?status=completed">Hoàn tất</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="nav-link" data-toggle="dropdown">
+                    <a href="/admin/nguoi-dung" class="nav-link" data-toggle="dropdown">
                         <i class="fa fa-user"></i>
                         <span>Khách hàng</span>
                     </a>
                 </li>
                 <li class="menu-header">Nội dung</li>
                 <li class="dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa fa-sticky-note"></i> <span>Bài viết</span></a>
+                    <a href="/admin/content/bai-viet" class="nav-link"><i class="fas fa fa-sticky-note"></i> <span>Bài viết</span></a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="nav-link"><i class="far fa-comment"></i> <span>Bình luận</span></a>
+                    <a href="/admin/content/binh-luan" class="nav-link"><i class="far fa-comment"></i> <span>Bình luận</span></a>
 
                 </li>
 
                 <li class="menu-header">Phân tích</li>
                 <li class="dropdown">
-                    <a href="#" class="nav-link has-dropdown"><i class="fa fa-money-bill"></i> <span>Doanh thu</span></a>
+                    <a href="admin/phan-tich" class="nav-link has-dropdown"><i class="fa fa-money-bill"></i> <span>Doanh thu</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="auth-forgot-password.html">Theo thời gian</a></li>
-                        <li><a href="auth-login.html">Theo sản phẩm</a></li>
+                        <li><a href="/admin/phan-tich/thoi-gian">Theo thời gian</a></li>
+                        <li><a href="/admin/phan-tich/san-pham">Theo sản phẩm</a></li>
                     </ul>
                 </li>
 

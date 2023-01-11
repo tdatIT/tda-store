@@ -3,6 +3,7 @@ package com.webapp.tdastore.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -20,6 +21,11 @@ public class Product {
     private long productId;
 
     @Column
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private String productCode;
 
     @Column
@@ -32,7 +38,7 @@ public class Product {
     private int quantity;
 
     @Column
-    private boolean status;
+    private int status;
 
     @Column
     private double price;
@@ -45,6 +51,9 @@ public class Product {
 
     @Column
     private Timestamp updateDate;
+
+    @Column
+    private boolean isDeleted;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
