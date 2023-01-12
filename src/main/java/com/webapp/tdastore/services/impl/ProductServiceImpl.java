@@ -1,6 +1,7 @@
 package com.webapp.tdastore.services.impl;
 
 import com.webapp.tdastore.entities.Product;
+import com.webapp.tdastore.entities.generator.GeneratorCode;
 import com.webapp.tdastore.repositories.ProductRepos;
 import com.webapp.tdastore.services.ProductServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -15,6 +18,9 @@ public class ProductServiceImpl implements ProductServices {
 
     @Autowired
     ProductRepos productRepos;
+
+    @Autowired
+    GeneratorCode generatorCode;
 
     @Override
     public List<Product> findAll(int page, int number) {
@@ -53,7 +59,11 @@ public class ProductServiceImpl implements ProductServices {
     @Override
     @Transactional
     public void insert(Product product) {
-        productRepos.save(product);
+        product.setCreateDate(new Timestamp(new Date().getTime()));
+        Product p = productRepos.save(product);
+        //Generate product code
+        p.setProductCode(generatorCode.generator(p.getProductId() + ""));
+        productRepos.save(p);
     }
 
     @Override

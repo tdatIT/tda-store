@@ -30,7 +30,8 @@ public class ProductDTO {
     @NotNull
     private int quantity;
 
-    private boolean status;
+    @NotNull
+    private int status;
     @NotNull
     @Min(value = 1000)
     private double price;

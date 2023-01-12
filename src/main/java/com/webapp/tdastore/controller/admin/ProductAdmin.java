@@ -1,18 +1,27 @@
 package com.webapp.tdastore.controller.admin;
 
+import com.webapp.tdastore.dto.ProductDTO;
 import com.webapp.tdastore.entities.Category;
 import com.webapp.tdastore.entities.Product;
+import com.webapp.tdastore.entities.ProductImage;
 import com.webapp.tdastore.services.CategoryServices;
+import com.webapp.tdastore.services.ProductImageService;
 import com.webapp.tdastore.services.ProductServices;
 import com.webapp.tdastore.services.UploadImageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,6 +33,10 @@ public class ProductAdmin {
     private CategoryServices categoryServices;
     @Autowired
     private UploadImageService imageService;
+    @Autowired
+    private ProductImageService productImageService;
+    @Autowired
+    private UploadImageService uploadService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -69,6 +82,39 @@ public class ProductAdmin {
         modelMap.addAttribute("categories", categories);
         modelMap.addAttribute("products", products);
         return "admin/product";
+
+    }
+
+    @RequestMapping(value = "/them", method = RequestMethod.GET)
+    public String getCreateProductPage(ModelMap modelMap) {
+        ProductDTO dto = new ProductDTO();
+        List<Category> categories = categoryServices.getAll();
+        modelMap.addAttribute("categories", categories);
+        modelMap.addAttribute("dto", dto);
+        return "admin/product-form";
+    }
+
+    @RequestMapping(value = "/them", method = RequestMethod.POST)
+    public String createNewProduct(@Valid @ModelAttribute ProductDTO dto,
+                                   ModelMap modelMap) throws IOException {
+        Product product = modelMapper.map(dto, Product.class);
+        if (dto.getImageFile().length > 0) {
+            List<ProductImage> images = new ArrayList<>();
+            //upload multi image
+            for (MultipartFile file : dto.getImageFile()) {
+                String filename = imageService.uploadFile(file);
+                //create new obj and set props
+                ProductImage i = new ProductImage();
+                i.setUrlImage(filename);
+                i.setUploadDate(new Date(new java.util.Date().getTime()));
+                i.setProduct(product);
+                images.add(i);
+            }
+            product.setImages(images);
+        }
+        //save product into db
+        productServices.insert(product);
+        return "redirect:/admin/san-pham";
 
     }
 

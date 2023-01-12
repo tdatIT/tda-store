@@ -140,7 +140,7 @@
                                                     <td>
                                                         <a href="#">
                                                             <img alt="image"
-                                                                 th:src="${p.images.size()>0} ? p.images[0].urlImage : '/img/product-img.png'"
+                                                                 th:src="${p.images.size()>0} ? ${p.images[0].urlImage} : '/img/product-img.png'"
                                                                  class="rounded-circle" width="35"
                                                                  data-toggle="title" title="san-pham">
                                                         </a>
