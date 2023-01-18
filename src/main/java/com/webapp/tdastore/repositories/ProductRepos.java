@@ -15,8 +15,10 @@ public interface ProductRepos extends JpaRepository<Product, Long> {
 
     List<Product> findByProductCode(String productCode);
 
+    Product findProductByProductCode(String code);
+
     @Query("select p from Product p where (:categoryId is null or p.category.categoryId = :categoryId) " +
-            "and (:status is null or p.status=:status)")
+            "and (:status is null or p.status=:status) and p.isDeleted=false")
     Page<Product> findProductByQuery(@Param("categoryId") Long categoryId,
                                      @Param("status") Integer status, Pageable pageable);
 }

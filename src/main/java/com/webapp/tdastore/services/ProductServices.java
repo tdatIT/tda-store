@@ -9,14 +9,17 @@ public interface ProductServices {
 
     List<Product> findQuery(Long categoryId, Integer status, int page, int number);
 
-    List<Product> findProductByCode(String code);
+    List<Product> listProductByCode(String code);
+
+    Product findProductByCode(String code);
+
     List<Product> findByKeyword(String keyword);
 
     Product findById(long id);
 
     long getCountProduct();
 
-    void insert(Product product);
+    String insert(Product product);
 
     void update(Product product);
 

@@ -28,8 +28,13 @@ public class ProductServiceImpl implements ProductServices {
     }
 
     @Override
-    public List<Product> findProductByCode(String code) {
+    public List<Product> listProductByCode(String code) {
         return productRepos.findByProductCode(code);
+    }
+
+    @Override
+    public Product findProductByCode(String code) {
+        return productRepos.findProductByProductCode(code);
     }
 
     @Override
@@ -58,17 +63,24 @@ public class ProductServiceImpl implements ProductServices {
 
     @Override
     @Transactional
-    public void insert(Product product) {
+    public String insert(Product product) {
         product.setCreateDate(new Timestamp(new Date().getTime()));
         Product p = productRepos.save(product);
         //Generate product code
         p.setProductCode(generatorCode.generator(p.getProductId() + ""));
         productRepos.save(p);
+        return p.getProductCode();
     }
 
     @Override
     @Transactional
     public void update(Product product) {
+        Product old = this.findProductByCode(product.getProductCode());
+        product.setCreateDate(old.getCreateDate());
+        if (product.getQuantity() == 0) {
+            product.setStatus(2);
+        }
+        product.setUpdateDate(new Timestamp(new Date().getTime()));
         productRepos.save(product);
     }
 
@@ -76,6 +88,8 @@ public class ProductServiceImpl implements ProductServices {
     @Transactional
     public void disableProduct(Product product) {
         product.setDeleted(true);
+        product.setStatus(-1);
+        product.setUpdateDate(new Timestamp(new Date().getTime()));
         productRepos.save(product);
     }
 }

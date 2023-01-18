@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Thông tin sản phẩm</title>
+    <title>Cập nhật sản phẩm</title>
     <th:block th:replace="admin/admin-fragments::stylesheet"></th:block>
     <link rel="stylesheet" href="/modules/jquery-selectric/selectric.css">
     <link rel="stylesheet" href="/modules/izitoast/css/iziToast.min.css">
@@ -42,17 +42,12 @@
                                 <div class="card-header">
                                     <h4>Thông tin sản phẩm</h4>
                                     <div class="section-header-button">
-                                        <button id="add-type" class="btn btn-primary">Thêm loại cho sản phẩm</button>
+                                        <button id="remove-product" class="btn btn-danger">Xóa sản phẩm</button>
                                     </div>
-                                    <a id="update-btn"
-                                       th:href="@{/admin/san-pham/chinh-sua/{code}(code = ${dto.productCode})}"
-                                       class="btn btn-icon justify-content-end">
-                                        <i class="fas fa-arrow-right"> </i>Cập nhật sản phẩm
-                                    </a>
                                 </div>
                                 <div class="card-body">
-                                    <form id="data-form" th:object="${dto}" method="post" action="/admin/san-pham/them"
-                                          enctype="multipart/form-data">
+                                    <form id="data-form" th:object="${dto}" method="post"
+                                          action="/admin/san-pham/cap-nhat">
                                         <div class="form-group row mb-4" th:if="*{productId != 0}">
                                             <label class="col-form-label text-md-right col-3 col-md-3 col-lg-3">ID</label>
                                             <div class="col-sm-3 col-md-3">
@@ -114,12 +109,14 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-3 col-md-3 col-lg-3">VND</label>
                                             <div class="col-sm-3 col-md-3">
-                                                <input id="preview-1" type="text" class="form-control" readonly>
+                                                <input th:value="${#numbers.formatDecimal(dto.price, 0, 'POINT', 0, 'COMMA')}"
+                                                       id="preview-1" type="text" class="form-control" readonly>
                                             </div>
 
                                             <label class="col-form-label col-1 col-md-1 col-lg-1">VND</label>
                                             <div class="col-sm-3 col-md-3 justify-content-start">
-                                                <input id="preview-2" type="text" class="form-control" readonly>
+                                                <input th:value="${#numbers.formatDecimal(dto.promotionPrice, 0, 'POINT', 0, 'COMMA')}"
+                                                       id="preview-2" type="text" class="form-control" readonly>
                                             </div>
                                         </div>
 
@@ -142,15 +139,6 @@
                                                        required>
                                             </div>
                                         </div>
-                                        <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Ảnh sản
-                                                phẩm</label>
-                                            <div class="col-sm-12 col-md-7">
-                                                <input id="upload" th:field="*{imageFile}" type="file"
-                                                       class="form-control"
-                                                       multiple>
-                                            </div>
-                                        </div>
                                         <hr>
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
@@ -165,85 +153,54 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Thông tin các option</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-md">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Loại</th>
+                                                <th>Màu/Cấu hình</th>
+                                                <th>Giá</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            <th:block th:each="option: ${options}">
+                                                <tr>
+                                                    <td class="noType" th:text="${option.noType}"></td>
+                                                    <td th:if="${option.type == 1}">Màu</td>
+                                                    <td th:if="${option.type == 2}">Cấu hình</td>
+                                                    <td th:text="${option.description}"></td>
+                                                    <td th:text="${#numbers.formatDecimal(option.specialPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"></td>
+                                                    <td>
+                                                        <div th:if="${option.deleted == false}"
+                                                             class="badge badge-success">
+                                                            Hoạt động
+                                                        </div>
+                                                        <div th:if="${option.deleted == true}"
+                                                             class="badge badge-warning">
+                                                            Dừng
+                                                        </div>
+                                                    </td>
+                                                    <td><a href="#" class="btn btn-danger action-type">Xóa Option</a>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
 
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </section>
-        </div>
-    </div>
-    <div class="modal fade" tabindex="-1" role="dialog" id="type-modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form id="style-form" method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thêm loại cho sản phẩm</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Mã SP</label>
-                            <input th:value="${dto.productCode}" name="productCode" type="text" class="form-control"
-                                   readonly>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-lg-3">
-                                <label>Phân loại</label>
-                                <div class="input-group">
-                                    <select name="type" id="type-select" class="selectric">
-                                        <option value="1">Màu sắc</option>
-                                        <option value="2">Cấu hình</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-9">
-                                <label>Pick Your Color</label>
-                                <div class="input-group colorpickerinput">
-                                    <input name="description" type="text" class="form-control" id="color-picker">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-fill-drip"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label>Nội dung cấu hình</label>
-                            <div class="col-sm-12 col-md-12">
-                                <textarea name="description" class="summernote-simple"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="form-group col-lg-6">
-                                <label>Giá tiền</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            VND
-                                        </div>
-                                    </div>
-                                    <input name="specialPrice" id="price-type" type="number"
-                                           class="form-control currency">
-
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <label>Format</label>
-                                <div id="price-format" class="input-group"
-                                     th:text="${#numbers.formatDecimal(dto.price, 0, 'POINT', 0, 'COMMA')+'₫'}">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer bg-whitesmoke br">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary">Thêm loại</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 </div>
@@ -253,6 +210,8 @@
 <!-- Page Specific JS File -->
 <script src="/modules/izitoast/js/iziToast.min.js"></script>
 <script src="/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="/modules/sweetalert/sweetalert.min.js"></script>
+
 <script src="/js/page/features-post-create.js"></script>
 
 <script>
@@ -260,7 +219,6 @@
         style: 'currency',
         currency: 'VND',
     });
-    $('#update-btn').hide();
     $('#default-price').on('input', function (e) {
         var price = $(this).val();
         $('#preview-1').val(formatter.format(price))
@@ -273,57 +231,13 @@
         var price = $(this).val();
         $('#price-format').text(formatter.format(price))
     })
-    $('#add-type').on('click', function (e) {
-        console.log('message-run:' + $('#productCode').val() == undefined)
-        if ($('#productCode').val() == undefined) {
-            iziToast.warning({
-                title: 'Hoàn thành thao tác',
-                message: 'Vui lòng lưu thông tin sản phẩm trước khi thêm loại mới',
-                position: 'bottomRight'
-            });
-        } else {
-            $('#type-modal').modal('show')
-        }
 
-    })
     $(".colorpickerinput").colorpicker({
         format: 'hex',
         component: '.input-group-append',
     });
-    $('.summernote-simple').summernote('disable');
 
-    $('#type-select').change(function () {
-        if ($(this).val() == 1) {
-            $('.summernote-simple').summernote('disable');
-            $('#color-picker').prop('disabled', false)
-        } else {
-            $('.summernote-simple').summernote('enable');
-            $('#color-picker').prop('disabled', true)
-        }
-
-    })
 </script>
-<th:block th:if="${view == true}">
-    <script>
-
-        $('#name').prop('readonly', true)
-        $('#category').prop('disabled', true)
-        $('.summernote').summernote('disable')
-        $('#default-price').prop('readonly', true)
-        $('#preview-1').val(formatter.format($('#default-price').val()))
-        $('#promotion-price').prop('readonly', true)
-        $('#preview-2').val(formatter.format($('#promotion-price').val()))
-        $('#quantity').prop('disabled', true)
-
-        $('#status-select').prop('disabled', true)
-        $('#upload').prop('readonly', true)
-        $('#data-form').attr('action', '')
-        $('#submit').prop('disabled', true)
-        $('#submit').hide()
-        $('#update-btn').show();
-
-    </script>
-</th:block>
 </body>
 
 </html>

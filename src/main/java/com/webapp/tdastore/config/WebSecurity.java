@@ -27,10 +27,17 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/tai-khoan").authenticated()
-                .and().formLogin().defaultSuccessUrl("/trang-chu")
+        http.formLogin().loginPage("/dang-nhap")
+                .defaultSuccessUrl("/trang-chu")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .failureUrl("/dang-nhap?error=true")
                 .and().logout().logoutSuccessUrl("/trang-chu")
                 .and().csrf().disable();
+        http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(60 * 24 * 3);
+
+        //Authentication and authorize
+        //http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
     }
 
 }

@@ -1,15 +1,14 @@
 package com.webapp.tdastore.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Table(name = "user")
 @Entity
-@Getter
-@Setter
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +35,16 @@ public class User {
     @Column
     private boolean status;
 
+    @Column
+    private Timestamp createDate;
+    @Column
+    private Timestamp updateDate;
+
     @OneToMany(mappedBy = "user")
     private List<UserAddress> address;
+
+    @OneToMany(mappedBy = "user")
+    private List<ResetPassToken> resetTokens;
 
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
@@ -45,4 +52,5 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
+
 }

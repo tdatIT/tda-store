@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Đăng ký tài khoản - TDA</title>
+
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/modules/fontawesome/css/all.min.css">
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="/modules/jquery-selectric/selectric.css">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
+</head>
+
+<body>
+<div id="app">
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="login-brand">
+                        <img src="/img/TDA-logo.png" alt="logo" width="100" class="shadow-light rounded-circle">
+                    </div>
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h4>Đăng ký tài khoản</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <form method="POST" th:object="${dto}">
+                                <div class="row">
+
+                                    <div class="form-group col-6">
+                                        <label for="last_name">Họ</label>
+                                        <input th:field="*{lastname}" id="last_name" type="text" class="form-control"
+                                               name="last_name" required>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="frist_name">Tên</label>
+                                        <input th:field="*{firstname}" id="frist_name" type="text" class="form-control"
+                                               name="frist_name" autofocus required>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input th:field="*{email}" id="email" type="email" class="form-control" name="email"
+                                           required>
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="password" class="d-block">Mật khẩu</label>
+                                        <input th:field="*{hashPassword}" id="password" type="password"
+                                               class="form-control pwstrength" data-indicator="pwindicator"
+                                               name="password" required>
+                                        <div id="pwindicator" class="pwindicator">
+                                            <div class="bar"></div>
+                                            <div class="label"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="password2" class="d-block">Nhập lại mật khẩu</label>
+                                        <input th:field="*{confirmPassword}" id="password2" type="password"
+                                               class="form-control" name="password-confirm" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-divider">
+                                    Địa chỉ
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>Tỉnh</label>
+                                        <select class="form-control selectric" required>
+                                            <option>Tp, Hồ Chí Minh</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label>Quận/Huyện</label>
+                                        <select class="form-control selectric" required>
+                                            <option>Quận 1</option>
+                                            <option>Quận Thủ Đức</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label>Số điện thoại</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="agree" class="custom-control-input" id="agree"
+                                               required>
+                                        <label class="custom-control-label" for="agree">Đồng ý với chính sách và điều
+                                            khoản</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                        Đăng ký
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        TDA Store
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- General JS Scripts -->
+<script src="/modules/jquery.min.js"></script>
+<script src="/modules/popper.js"></script>
+<script src="/modules/tooltip.js"></script>
+<script src="/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="/modules/moment.min.js"></script>
+<script src="/js/stisla.js"></script>
+
+<!-- JS Libraies -->
+<script src="/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+<script src="/modules/jquery-selectric/jquery.selectric.min.js"></script>
+
+<!-- Page Specific JS File -->
+<script src="/js/page/auth-register.js"></script>
+
+<!-- Template JS File -->
+<script src="/js/scripts.js"></script>
+<script src="/js/custom.js"></script>
+</body>
+</html>

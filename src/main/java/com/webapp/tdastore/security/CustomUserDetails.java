@@ -15,7 +15,6 @@ import java.util.Collections;
 public class CustomUserDetails implements UserDetails {
     private User user;
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRoleName()));

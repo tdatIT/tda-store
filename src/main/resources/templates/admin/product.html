@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Quản lý danh mục</title>
+    <title>Quản lý sản phẩm</title>
     <th:block th:replace="admin/admin-fragments::stylesheet"></th:block>
     <link rel="stylesheet" href="/modules/jquery-selectric/selectric.css">
 </head>
@@ -127,9 +127,9 @@
                                                     <td th:text="${p.productId}"></td>
                                                     <td>[[${p.productName}]]
                                                         <div class="table-links">
-                                                            <a th:href="@{/san-pham(code=${p.productCode})}">Xem</a>
+                                                            <a th:href="@{/admin/san-pham/{code}(code=${p.productCode})}">Xem</a>
                                                             <div class="bullet"></div>
-                                                            <a th:href="@{/admin/san-pham/chinh-sua(code=${p.productId})}">
+                                                            <a th:href="@{/admin/san-pham/chinh-sua/{code}(code=${p.productCode})}">
                                                                 Chỉnh sửa
                                                             </a>
                                                         </div>

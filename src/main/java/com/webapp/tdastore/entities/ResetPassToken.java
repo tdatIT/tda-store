@@ -2,18 +2,20 @@ package com.webapp.tdastore.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Random;
 
 
 @Getter
 @Setter
 @Entity
-public class VerificationToken {
-    private static final int EXPIRATION = 60 * 24;
+public class ResetPassToken {
+    private static final int EXPIRATION = 60 * 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +23,7 @@ public class VerificationToken {
 
     private String token;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
