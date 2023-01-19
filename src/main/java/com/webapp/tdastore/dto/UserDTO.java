@@ -1,11 +1,13 @@
 package com.webapp.tdastore.dto;
 
+import com.webapp.tdastore.config.ValidatorUtils;
 import com.webapp.tdastore.entities.Order;
 import com.webapp.tdastore.entities.Role;
 import com.webapp.tdastore.entities.UserAddress;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.sql.Timestamp;
 import java.util.List;
@@ -16,25 +18,29 @@ public class UserDTO {
     private long userId;
 
     @NotBlank
+    @Pattern(regexp = ValidatorUtils.VIETNAMESE_REGEX)
     private String firstname;
 
     @NotBlank
+    @Pattern(regexp = ValidatorUtils.VIETNAMESE_REGEX)
     private String lastname;
 
     @NotBlank
-    //@Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$", message = "Not email form")
+    @Pattern(regexp = ValidatorUtils.EMAIL_REGEX)
     private String email;
 
     @NotBlank
-    //@Pattern(regexp = "  ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–_[{}]:;',?/*~$^+=<>]).{8,20}$\n")
+    @Pattern(regexp = ValidatorUtils.PASSWORD_REGEX)
     private String hashPassword;
 
     @NotBlank
-    //@Pattern(regexp = "  ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–_[{}]:;',?/*~$^+=<>]).{8,20}$\n")
+    @Pattern(regexp = ValidatorUtils.PASSWORD_REGEX)
     private String confirmPassword;
 
+    @Pattern(regexp = ValidatorUtils.PHONE_REGEX)
     private String phone;
 
+    @NotNull
     private UserAddress defaultAddress;
 
     private String avatar;

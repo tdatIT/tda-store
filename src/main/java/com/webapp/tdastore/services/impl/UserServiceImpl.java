@@ -1,10 +1,7 @@
 package com.webapp.tdastore.services.impl;
 
 import com.webapp.tdastore.dto.UserDTO;
-import com.webapp.tdastore.entities.ResetPassToken;
-import com.webapp.tdastore.entities.Role;
-import com.webapp.tdastore.entities.User;
-import com.webapp.tdastore.entities.VerificationToken;
+import com.webapp.tdastore.entities.*;
 import com.webapp.tdastore.repositories.ResetPassTokenRepos;
 import com.webapp.tdastore.repositories.UserRepos;
 import com.webapp.tdastore.repositories.VerificationTokenRepos;
@@ -20,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -67,7 +65,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerAccount(User user) {
-
+        VerificationToken token = tokenRepos.findVerificationTokenByUser(user);
+        token.setUsed(true);
+        tokenRepos.save(token);
         userRepos.save(user);
     }
 
@@ -76,12 +76,20 @@ public class UserServiceImpl implements UserService {
         if (existEmail(dto.getEmail()))
             return null;
         User user = mapper.map(dto, User.class);
+        //hash password
         String hashPassword = encoder.encode(user.getHashPassword());
         user.setHashPassword(hashPassword);
+        //set date
         user.setCreateDate(new Timestamp(new Date().getTime()));
+        //setRole
         Role role = new Role();
         role.setRoleId(2);
         user.setRole(role);
+        //set default address
+        UserAddress default_add = dto.getDefaultAddress();
+        default_add.setUser(user);
+        user.setAddress(new ArrayList<>());
+        user.getAddress().add(default_add);
         return userRepos.save(user);
     }
 
@@ -90,6 +98,7 @@ public class UserServiceImpl implements UserService {
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);
         verificationToken.setUser(user);
+        verificationToken.setUsed(false);
         tokenRepos.save(verificationToken);
     }
 

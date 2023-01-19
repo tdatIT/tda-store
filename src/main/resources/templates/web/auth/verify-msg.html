@@ -27,15 +27,15 @@
                         <img src="/img/TDA-logo.png" alt="logo" width="100" class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Xác thực thất bại</h4></div>
+                        <div class="card-header"><h4>Thông báo hệ thống</h4></div>
                         <div class="card-body">
                             <div class="col-12 mb-4">
-                                <div class="hero align-items-center bg-danger text-white">
+                                <div class="hero align-items-center bg-info text-white">
                                     <div class="hero-inner text-center">
-                                        <h2>Xảy ra lỗi</h2>
-                                        <p class="lead">Có vẽ tài khoản của bạn bị khóa hoặc hết hạn dể xác nhận</p>
+                                        <h2>Thông báo</h2>
+                                        <p class="lead" th:text="${msg}"></p>
                                         <div class="mt-4">
-                                            <a href="/static" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
+                                            <a th:href="@{${link}}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
                                                     class="fas fa-sign-in-alt"></i>Trang chủ</a>
                                         </div>
                                     </div>

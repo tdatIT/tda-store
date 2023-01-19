@@ -25,6 +25,9 @@ public class VerificationToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    @Column
+    private boolean isUsed;
+
     private Date expiryDate = calculateExpiryDate(EXPIRATION);
 
     private Date calculateExpiryDate(int expiryTimeInMinutes) {

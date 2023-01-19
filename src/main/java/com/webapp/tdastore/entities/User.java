@@ -40,7 +40,7 @@ public class User {
     @Column
     private Timestamp updateDate;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserAddress> address;
 
     @OneToMany(mappedBy = "user")

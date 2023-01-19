@@ -21,10 +21,13 @@ public class UserAddress {
     private String detail;
 
     @Column
-    private String province;
+    private int province;
 
     @Column
-    private String district;
+    private int district;
+
+    @Column
+    private int ward;
 
     @Column
     private String commune;

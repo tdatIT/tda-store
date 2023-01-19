@@ -36,8 +36,14 @@
 
                         <div class="card-body">
                             <form method="POST" th:object="${dto}">
+                                <div th:if="${(param.error != null) and (param.error[0] == 'true')}" class="row">
+                                    <div class="form-group col-12">
+                                        <div class="alert alert-danger">
+                                            Vui lòng nhập đúng định dạng dữ liệu
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
-
                                     <div class="form-group col-6">
                                         <label for="last_name">Họ</label>
                                         <input th:field="*{lastname}" id="last_name" type="text" class="form-control"
@@ -80,24 +86,31 @@
                                     Địa chỉ
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-4">
                                         <label>Tỉnh</label>
-                                        <select class="form-control selectric" required>
-                                            <option>Tp, Hồ Chí Minh</option>
+                                        <select th:field="*{defaultAddress.province}" id="province"
+                                                class="form-control">
+                                            <option value="-1">Tỉnh/Thành phố</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-4">
                                         <label>Quận/Huyện</label>
-                                        <select class="form-control selectric" required>
-                                            <option>Quận 1</option>
-                                            <option>Quận Thủ Đức</option>
+                                        <select th:field="*{defaultAddress.district}" id="district"
+                                                class="form-control">
+                                            <option value="-1">Quận/Huyện</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label>Xã/Phường</label>
+                                        <select th:field="*{defaultAddress.ward}" id="ward" class="form-control">
+                                            <option value="-1">Xã phường</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-12">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control" required>
+                                        <input th:field="*{phone}" type="text" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -146,5 +159,7 @@
 <!-- Template JS File -->
 <script src="/js/scripts.js"></script>
 <script src="/js/custom.js"></script>
+
+<script src="/js/province_data.js"></script>
 </body>
 </html>
