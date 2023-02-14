@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="web/page/web-fragments::css_link"></th:block>
+    <title>Bộ vi xử lý - TDA Laptop</title>
+</head>
+
+<body>
+<!-- Offcanvas Menu Begin -->
+<th:block th:replace="web/page/web-fragments::header"></th:block>
+<!-- Header Section End -->
+
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="shop__sidebar">
+                    <div class="sidebar__categories">
+                        <div class="section-title">
+                            <h4>Doanh mục sản phẩm</h4>
+                        </div>
+                        <div class="categories__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <th:block th:each="c:${categories}">
+                                    <div class="card">
+                                        <div class="card-heading active">
+                                            <a th:href="@{${c.code}}" th:text="${c.name}"></a>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar__filter">
+                        <div class="section-title">
+                            <h4>Lọc theo giá</h4>
+                        </div>
+                        <div class="filter-range-wrap">
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                 data-min="0" data-max="999999999"></div>
+                            <div class="range-slider">
+                                <div class="price-input">
+                                    <p>Giá:</p>
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="sidebar__sizes">
+                        <div class="section-title">
+                            <h4>Sắp xếp theo hãng</h4>
+                        </div>
+                        <div class="size__list">
+                            <label for="xxs">
+                                Intel
+                                <input type="checkbox" id="xxs">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="xs">
+                                AMD
+                                <input type="checkbox" id="xs">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="row">
+                    <th:block th:each="p:${products}">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" th:attr="data-setbg=${p.images[0].urlImage}">
+                                    <div class="label new">New</div>
+                                    <ul class="product__hover">
+                                        <li><a th:href="@{${p.images[0].urlImage}}" class="image-popup"><span
+                                                class="arrow_expand"></span></a></li>
+                                        <li><a href="/gio-hang/them" th:attr="data-id=${p.productCode}"><span
+                                                class="icon_heart_alt"></span></a></li>
+                                        <li><a href="/gio-hang/them" th:attr="data-id=${p.productCode}"><span
+                                                class="icon_bag_alt"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a th:href="@{/chi-tiet-san-pham(code=${p.productCode})}"
+                                           th:text="${p.productName}"></a></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="product__price"
+                                         th:text="${#numbers.formatDecimal(p.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                    <div class="col-lg-12 text-center">
+                        <a class="btn btn-outline-info" href="#">Xem thêm sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->
+
+
+<!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-car"></i>
+                    <h6>Free Shipping</h6>
+                    <p>Cho đơn hàng từ 1 triệu</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-money"></i>
+                    <h6>Thanh toán dễ dàng</h6>
+                    <p>Nhiều hình thức thanh toán cho khách hàng</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-support"></i>
+                    <h6>Hỗ trợ tư vấn</h6>
+                    <p>Giải đáp thắc mắc nhanh chóng</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-user"></i>
+                    <h6>Lắng nghe khách hàng</h6>
+                    <p>Sẳn sàng tiếp nhận phản hồi từ khách hàng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+<!-- Instagram Begin -->
+<div class="instagram">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic4.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_mombaby.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic2.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic3.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_2_electronic3.png?1674027402656">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Instagram End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Hệ thống kinh doanh các sản phẩm công nghệ như laptop, phụ kiện máy tính chính hãng, cam kết
+                        bảo hành, hỗ trợ giải đáp thắc mắc, tư vấn dịch vụ cho khách hàng.</p>
+                    <div class="footer__payment">
+
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    <h6>Liên kết</h6>
+                    <ul>
+                        <li><a href="#">Đăng nhặp</a></li>
+                        <li><a href="/doanh-muc">Doanh mục</a></li>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="footer__widget">
+                    <h6>Chính sách</h6>
+                    <ul>
+                        <li><a href="#">Người dùng</a></li>
+                        <li><a href="#">Mua hàng</a></li>
+                        <li><a href="#">Bảo hành</a></li>
+                        <li><a href="#">Khiếu nại</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 col-sm-8">
+                <div class="footer__newslatter">
+                    <h6>Nhận thông báo</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Email">
+                        <button type="submit" class="site-btn">Đăng ký</button>
+                    </form>
+                    <div class="footer__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Tìm kiếm">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
+
+<th:block th:replace="web/page/web-fragments::js_link"></th:block>
+</body>
+
+</html>

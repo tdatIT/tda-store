@@ -1,108 +1,16 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ashion Template">
-    <meta name="keywords" content="Ashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <th:block th:replace="web/page/web-fragments::css_link"></th:block>
     <title>TDA Store - Cung cấp laptop phụ kiện máy tính</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="https://unpkg.com/@icon/elegant-icons/elegant-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link rel="stylesheet" href="css/stylev2.css" type="text/css">
 </head>
 
 <body>
-<!-- Offcanvas Menu Begin -->
-<div class="offcanvas-menu-overlay"></div>
-<div class="offcanvas-menu-wrapper">
-    <div class="offcanvas__close">+</div>
-    <ul class="offcanvas__widget">
-        <li><span class="icon_search search-switch"></span></li>
-        <li><a href="#"><span class="icon_heart_alt"></span>
-            <div class="tip">2</div>
-        </a></li>
-        <li><a href="#"><span class="icon_bag_alt"></span>
-            <div class="tip">2</div>
-        </a></li>
-    </ul>
-    <div class="offcanvas__logo">
-        <a href="./index.html">TDA STORE</a>
-    </div>
-    <div id="mobile-menu-wrap"></div>
-    <div class="offcanvas__auth">
-        <a href="/dang-nhap">Đăng nhập</a>
-        <a href="/dang-ky">Đăng ký</a>
-    </div>
-</div>
-<!-- Offcanvas Menu End -->
+<th:block th:replace="web/page/web-fragments::header"></th:block>
 
-<!-- Header Section Begin -->
-<header class="header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-3 col-lg-2">
-                <div class="header__logo">
-                    <a href="./index.html">TDA STORE</a>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-7">
-                <nav class="header__menu">
-                    <ul>
-                        <li class="active"><a href="./index.html">Trang Chủ</a></li>
-                        <li><a href="#">Doanh Mục</a>
-                            <ul class="dropdown">
-                                <li><a href="./product-details.html">Product Details</a></li>
-                                <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                <li><a href="./checkout.html">Checkout</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Khuyến Mãi</a></li>
-                        <li><a href="#">Mua Hàng</a></li>
-                        <li><a href="./shop.html">CSKH</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-lg-3">
-                <div class="header__right">
-                    <div class="header__right__auth">
-                        <a href="/dang-nhap">Đăng nhặp</a>
-                        <a href="/dang-ky">Đăng ký</a>
-                    </div>
-                    <ul class="header__right__widget">
-                        <li><span class="icon_search search-switch"></span></li>
-                        <li><a href="#"><span class="icon_heart_alt"></span>
-                            <div class="tip">2</div>
-                        </a></li>
-                        <li><a href="#"><span class="icon_bag_alt"></span>
-                            <div class="tip">2</div>
-                        </a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="canvas__open">
-            <i class="fa fa-bars"></i>
-        </div>
-    </div>
-</header>
-<!-- Header Section End -->
 
 <!-- Categories Section Begin -->
 <section class="categories">
@@ -112,9 +20,7 @@
                 <div class="categories__item categories__large__item set-bg"
                      data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/slider1_2.jpg?1674027402656">
                     <div class="categories__text">
-                        <h1>Khuyến mãi xuân về</h1>
-                        <p>Giảm ngay hóa 10% cho hóa đơn trên 1 triệu từ 15/1 đến 01/02 năm 2023</p>
-                        <a href="#">Xem ngay</a>
+
                     </div>
                 </div>
             </div>
@@ -124,9 +30,7 @@
                         <div class="categories__item set-bg"
                              data-setbg="https://technews.com.vn/wp-content/uploads/2022/07/msi-desktop-intel-core-i7-xs.jpg">
                             <div class="categories__text">
-                                <h4>CPU - Vi Xử Lý</h4>
-                                <p>358 items</p>
-                                <a href="#">Xem ngay</a>
+
                             </div>
                         </div>
                     </div>
@@ -134,9 +38,7 @@
                         <div class="categories__item set-bg"
                              data-setbg="https://salt.tikicdn.com/ts/tmp/a1/fa/e8/52636c9a0e7bcab9764166faadc76f14.jpg">
                             <div class="categories__text">
-                                <h4>RAM - Bộ nhớ cho PC/LAPTOP</h4>
-                                <p>273 items</p>
-                                <a href="#">Xem ngay</a>
+
                             </div>
                         </div>
                     </div>
@@ -144,18 +46,15 @@
                         <div class="categories__item set-bg"
                              data-setbg="https://i.pinimg.com/originals/e9/d3/35/e9d335f25758c4eca3f59d2284d470bf.jpg">
                             <div class="categories__text">
-                                <h4>LAPTOP - Máy tính xách tay</h4>
-                                <p>159 items</p>
-                                <a href="#">Xem ngay</a>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="http://product.hstatic.net/1000333506/product/3060ti_asus_33a252d3566a46bbb6179571e5c3ac09_large__1__6f585455d0924f34aa1cf4a75f07d9c2_grande.png">
+                        <div class="categories__item set-bg"
+                             data-setbg="http://product.hstatic.net/1000333506/product/3060ti_asus_33a252d3566a46bbb6179571e5c3ac09_large__1__6f585455d0924f34aa1cf4a75f07d9c2_grande.png">
                             <div class="categories__text">
-                                <h4>Các sản phẩm khuyến mãi</h4>
-                                <p>792 items</p>
-                                <a href="#">Xem ngay</a>
+
                             </div>
                         </div>
                     </div>
@@ -178,203 +77,51 @@
             <div class="col-lg-8 col-md-8">
                 <ul class="filter__controls">
                     <li class="active" data-filter="*">All</li>
-                    <li data-filter=".women">CPU</li>
-                    <li data-filter=".men">RAM</li>
-                    <li data-filter=".kid">SSD</li>
-                    <li data-filter=".accessories">Card đồ họa</li>
-                    <li data-filter=".cosmetic">Laptop</li>
+                    <li data-filter=".cpu">CPU</li>
+                    <li data-filter=".ram">RAM</li>
+                    <li data-filter=".ssd">SSD</li>
+                    <li data-filter=".vga">Card đồ họa</li>
+                    <li data-filter=".laptop">Laptop</li>
                 </ul>
             </div>
         </div>
         <div class="row property__gallery">
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
-                        <div class="label new">New</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-1.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Buttons tweed blazer</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+            <th:block th:each="p:${new_products_6}">
+                <div class="col-lg-3 col-md-4 col-sm-6 mix" th:classappend="${p.category.code}">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" th:attr="data-setbg=${p.images[0].urlImage}">
+                            <div class="label new">Mới</div>
+                            <ul class="product__hover">
+                                <li><a th:href="@{${p.images[0].urlImage}}" class="image-popup"><span
+                                        class="arrow_expand"></span></a></li>
+                                <li><a class="favourite-btn" th:attr="data-id=${p.productCode}"><span
+                                        class="icon_heart_alt"></span></a></li>
+                                <li>
+                                    <a class="add-to-cart" th:attr="data-id=${p.productCode}">
+                                        <span class="icon_cart_alt"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="product__price">$ 59.0</div>
+                        <div class="product__item__text">
+                            <h6><a href="#" th:text="${p.productName}"></a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price"
+                                 th:text="${#numbers.formatDecimal(p.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                 th:if="${p.promotionPrice!=0}"></div>
+                            <div class="product__price"
+                                 th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                 th:if="${p.promotionPrice==0}"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix men">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-2.jpg">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-2.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Flowy striped skirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix accessories">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-3.jpg">
-                        <div class="label stockout">out of stock</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-3.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Cotton T-Shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-4.jpg">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-4.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Slim striped pocket shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix kid">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-5.jpg">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-5.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Fit micro corduroy shirt</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-6.jpg">
-                        <div class="label sale">Sale</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-6.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Tropical Kimono</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-7.jpg">
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-7.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Contrasting sunglasses</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 59.0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 mix women men kid accessories cosmetic">
-                <div class="product__item sale">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/product-8.jpg">
-                        <div class="label">Sale</div>
-                        <ul class="product__hover">
-                            <li><a href="img/product/product-8.jpg" class="image-popup"><span
-                                    class="arrow_expand"></span></a></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__item__text">
-                        <h6><a href="#">Water resistant backpack</a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                    </div>
-                </div>
-            </div>
+            </th:block>
         </div>
     </div>
 </section>
@@ -390,54 +137,29 @@
                     <div class="section-title">
                         <h4>Sản phẩm hot</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/ht-1.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Chain bucket bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                    <th:block th:each="p:${hot_products_3}">
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img th:src="${p.images[0].urlImage}" alt="anh-san-pham" height="90px" width="90px">
                             </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/ht-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Pendant earrings</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            <div class="trend__item__text">
+                                <h6 th:text="${p.productName}"></h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice!=0}"></div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice==0}"></div>
                             </div>
-                            <div class="product__price">$ 59.0</div>
                         </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/ht-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
+                    </th:block>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -445,54 +167,29 @@
                     <div class="section-title">
                         <h4>Sản phẩm bán chạy</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/bs-1.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Cotton T-Shirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                    <th:block th:each="p:${trend_products_3}">
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img th:src="${p.images[0].urlImage}" alt="anh-san-pham" height="90px" width="90px">
                             </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/bs-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Zip-pockets pebbled tote <br />briefcase</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            <div class="trend__item__text">
+                                <h6 th:text="${p.productName}"></h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice!=0}"></div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice==0}"></div>
                             </div>
-                            <div class="product__price">$ 59.0</div>
                         </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/bs-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Round leather bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
+                    </th:block>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-6">
@@ -500,58 +197,34 @@
                     <div class="section-title">
                         <h4>Sản phẩm mới</h4>
                     </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/f-1.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Bow wrap skirt</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                    <th:block th:each="p:${new_products_3}">
+                        <div class="trend__item">
+                            <div class="trend__item__pic">
+                                <img th:src="${p.images[0].urlImage}" alt="anh-san-pham" height="90px" width="90px">
                             </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/f-2.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Metallic earrings</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                            <div class="trend__item__text">
+                                <h6 th:text="${p.productName}"></h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice!=0}"></div>
+                                <div class="product__price"
+                                     th:text="${#numbers.formatDecimal(p.price, 0, 'POINT', 0, 'COMMA')+'₫'}"
+                                     th:if="${p.promotionPrice==0}"></div>
                             </div>
-                            <div class="product__price">$ 59.0</div>
                         </div>
-                    </div>
-                    <div class="trend__item">
-                        <div class="trend__item__pic">
-                            <img src="img/trend/f-3.jpg" alt="">
-                        </div>
-                        <div class="trend__item__text">
-                            <h6>Flap cross-body bag</h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="product__price">$ 59.0</div>
-                        </div>
-                    </div>
+                    </th:block>
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 <!-- Trend Section End -->
 
@@ -705,7 +378,7 @@
                     <h6>Liên kết</h6>
                     <ul>
                         <li><a href="#">Đăng nhặp</a></li>
-                        <li><a href="#">Doanh mục</a></li>
+                        <li><a href="/doanh-muc">Doanh mục</a></li>
                         <li><a href="#">Trang chủ</a></li>
                         <li><a href="#">Giỏ hàng</a></li>
                     </ul>
@@ -754,18 +427,7 @@
 </div>
 <!-- Search End -->
 
-<!-- Js Plugins -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-<script src=" http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-<script src="js/main.js"></script>
+<th:block th:replace="web/page/web-fragments::js_link"></th:block>
 </body>
 
 </html>

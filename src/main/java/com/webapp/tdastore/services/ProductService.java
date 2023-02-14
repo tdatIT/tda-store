@@ -4,8 +4,15 @@ import com.webapp.tdastore.entities.Product;
 
 import java.util.List;
 
-public interface ProductServices {
+public interface ProductService {
     List<Product> findAll(int page, int number);
+
+    List<Product> findNewProduct(int page, int number);
+
+    List<Product> findHotProduct(int page, int number);
+
+    List<Product> findHotTrend(int page, int number);
+
 
     List<Product> findQuery(Long categoryId, Integer status, int page, int number);
 
@@ -24,4 +31,6 @@ public interface ProductServices {
     void update(Product product);
 
     void disableProduct(Product product);
+
+    List<Product> findByCategoryCode(String code,int page);
 }

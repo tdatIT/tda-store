@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="web/page/web-fragments::css_link"></th:block>
+    <title>Giỏ hàng - TDA Laptop</title>
+</head>
+
+<body>
+<!-- Offcanvas Menu Begin -->
+<th:block th:replace="web/page/web-fragments::header"></th:block>
+<!-- Header Section End -->
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="/"><i class="fa fa-home"></i> Trang chủ</a>
+                    <span>Giỏ hàng</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Shop Cart Section Begin -->
+<section class="shop-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div th:if="${items.size() == 0}" class="alert alert-warning">Giỏ hàng trống</div>
+                <div class="shop__cart__table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Sản Phẩm</th>
+                            <th>Giá</th>
+                            <th>Khuyến mãi</th>
+                            <th>Số lượng</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="i:${items}">
+                        <tr>
+                            <td class="cart__product__item">
+                                <img th:src="${i.product.images[0].urlImage}" alt="" height="90px" width="90px">
+                                <div class="cart__product__item__title">
+                                    <h6 th:text="${i.product.productName}"></h6>
+                                    <div class="rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <p>Code: <span class="code-product" th:text="${i.product.productCode}"></span></p>
+                                </div>
+                            </td>
+                            <td class="cart__price"
+                                th:text="${#numbers.formatDecimal(i.product.price, 0, 'POINT', 0, 'COMMA')+'₫'}"></td>
+                            <td class="cart__discount"
+                                th:text="${i.product.promotionPrice > 0 ?
+                                    #numbers.formatDecimal(i.product.promotionPrice, 0, 'POINT', 0, 'COMMA')+'₫'
+                                    :#numbers.formatDecimal(i.product.price, 0, 'POINT', 0, 'COMMA')+'₫'}"></td>
+                            <td class="cart__quantity">
+                                <div class="pro-qty">
+                                    <input type="text" th:value="${i.quantity}"
+                                           th:attr="data-id=${i.product.productCode}"
+                                           readonly>
+                                </div>
+                            </td>
+                            <td class="cart__close"><span class="icon_close"
+                                                          th:attr="data-id=${i.product.productCode}"></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn">
+                    <a href="/">Quay lại trang chủ</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="cart__btn update__btn">
+                    <a href="#"><span class="icon_loading"></span> Cập nhật lại giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="discount__content">
+                    <h6>Mã giảm giá</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Enter your coupon code">
+                        <button type="submit" class="site-btn">Áp dụng</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 offset-lg-2">
+                <div class="cart__total__procced">
+                    <h6>Tổng giá</h6>
+                    <ul>
+                        <li>Tạm tính<span id="total"
+                                          th:text="${#numbers.formatDecimal(amount, 0, 'POINT', 0, 'COMMA')+'₫'}"></span>
+                        </li>
+                        <li>Giảm giá <span id="discount"
+                                           th:text="${#numbers.formatDecimal((amount - total_discount), 0, 'POINT', 0, 'COMMA')+'₫'}"></span>
+                        </li>
+                        <li>Tổng cộng (chưa kèm vận chuyển) <span id="amount"
+                                                                  th:text="${#numbers.formatDecimal(total_discount, 0, 'POINT', 0, 'COMMA')+'₫'}"></span>
+                        </li>
+                    </ul>
+                    <a href="/checkout" class="primary-btn">Đặt hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Cart Section End -->
+
+
+<!-- Services Section Begin -->
+<section class="services spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-car"></i>
+                    <h6>Free Shipping</h6>
+                    <p>Cho đơn hàng từ 1 triệu</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-money"></i>
+                    <h6>Thanh toán dễ dàng</h6>
+                    <p>Nhiều hình thức thanh toán cho khách hàng</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-support"></i>
+                    <h6>Hỗ trợ tư vấn</h6>
+                    <p>Giải đáp thắc mắc nhanh chóng</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-user"></i>
+                    <h6>Lắng nghe khách hàng</h6>
+                    <p>Sẳn sàng tiếp nhận phản hồi từ khách hàng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+<!-- Instagram Begin -->
+<div class="instagram">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic4.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_mombaby.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic2.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_1_electronic3.png?1674027402656">
+
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                <div class="instagram__item set-bg"
+                     data-setbg="https://bizweb.dktcdn.net/100/329/122/themes/835213/assets/banner_2_electronic3.png?1674027402656">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Instagram End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Hệ thống kinh doanh các sản phẩm công nghệ như laptop, phụ kiện máy tính chính hãng, cam kết
+                        bảo hành, hỗ trợ giải đáp thắc mắc, tư vấn dịch vụ cho khách hàng.</p>
+                    <div class="footer__payment">
+
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    <h6>Liên kết</h6>
+                    <ul>
+                        <li><a href="#">Đăng nhặp</a></li>
+                        <li><a href="/doanh-muc">Doanh mục</a></li>
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Giỏ hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="footer__widget">
+                    <h6>Chính sách</h6>
+                    <ul>
+                        <li><a href="#">Người dùng</a></li>
+                        <li><a href="#">Mua hàng</a></li>
+                        <li><a href="#">Bảo hành</a></li>
+                        <li><a href="#">Khiếu nại</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 col-sm-8">
+                <div class="footer__newslatter">
+                    <h6>Nhận thông báo</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Email">
+                        <button type="submit" class="site-btn">Đăng ký</button>
+                    </form>
+                    <div class="footer__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Tìm kiếm">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
+
+<th:block th:replace="web/page/web-fragments::js_link"></th:block>
+</body>
+
+</html>

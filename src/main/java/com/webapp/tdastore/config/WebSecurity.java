@@ -37,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(60 * 24 * 3);
 
         //Authentication and authorize
-        //http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
     }
 
 }

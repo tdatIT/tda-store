@@ -93,22 +93,22 @@
         items: 1,
         dots: false,
         nav: true,
-        navText: ["<i class='arrow_carrot-left'></i>","<i class='arrow_carrot-right'></i>"],
+        navText: ["<i class='arrow_carrot-left'></i>", "<i class='arrow_carrot-right'></i>"],
         smartSpeed: 1200,
         autoHeight: false,
         autoplay: false,
         mouseDrag: false,
         startPosition: 'URLHash'
-    }).on('changed.owl.carousel', function(event) {
+    }).on('changed.owl.carousel', function (event) {
         var indexNum = event.item.index + 1;
         product_thumbs(indexNum);
     });
 
-    function product_thumbs (num) {
+    function product_thumbs(num) {
         var thumbs = document.querySelectorAll('.product__thumb a');
         thumbs.forEach(function (e) {
             e.classList.remove("active");
-            if(e.hash.split("-")[1] == num) {
+            if (e.hash.split("-")[1] == num) {
                 e.classList.add("active");
             }
         })
@@ -124,12 +124,12 @@
 
 
     $(".nice-scroll").niceScroll({
-        cursorborder:"",
-        cursorcolor:"#dddddd",
-        boxzoom:false,
+        cursorborder: "",
+        cursorcolor: "#dddddd",
+        boxzoom: false,
         cursorwidth: 5,
         background: 'rgba(0, 0, 0, 0.2)',
-        cursorborderradius:50,
+        cursorborderradius: 50,
         horizrailenabled: false
     });
 
@@ -142,7 +142,7 @@
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
 
-    if(mm == 12) {
+    if (mm == 12) {
         mm = '01';
         yyyy = yyyy + 1;
     } else {
@@ -157,7 +157,7 @@
 
     /* var timerdate = "2020/12/30" */
 
-    $("#countdown-time").countdown(timerdate, function(event) {
+    $("#countdown-time").countdown(timerdate, function (event) {
         $(this).html(event.strftime("<div class='countdown__item'><span>%D</span> <p>Day</p> </div>" + "<div class='countdown__item'><span>%H</span> <p>Hour</p> </div>" + "<div class='countdown__item'><span>%M</span> <p>Min</p> </div>" + "<div class='countdown__item'><span>%S</span> <p>Sec</p> </div>"));
     });
 
@@ -185,10 +185,10 @@
     /*------------------
 		Single Product
 	--------------------*/
-    $('.product__thumb .pt').on('click', function(){
+    $('.product__thumb .pt').on('click', function () {
         var imgurl = $(this).data('imgbigurl');
         var bigImg = $('.product__big__img').attr('src');
-        if(imgurl != bigImg) {
+        if (imgurl != bigImg) {
             $('.product__big__img').attr({src: imgurl});
         }
     });
@@ -196,23 +196,52 @@
     /*-------------------
 		Quantity change
 	--------------------- */
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+
     var proQty = $('.pro-qty');
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var productCode = $button.parent().find("input").data('id')
+        console.log(productCode)
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
-        $button.parent().find('input').val(newVal);
+        $.ajax({
+            url: '/gio-hang/cap-nhat',
+            method: 'post',
+            data: {
+                'productCode': productCode,
+                'quantity': newVal
+            },
+            success: function (data) {
+                $button.parent().find('input').val(newVal);
+                $('#total').text(formatter.format(data.new_total))
+                $('#discount').text(formatter.format(data.new_discount))
+                $('#amount').text(formatter.format((data.new_total - data.new_discount)))
+                $("#cart-size").text(parseInt(data.new_quantity))
+            },
+            error: function () {
+                iziToast.warning({
+                    title: 'Thất bại',
+                    message: 'Cập nhật số lượng không thành công',
+                    position: 'topRight'
+                });
+            }
+        })
+
     });
 
     /*-------------------
@@ -224,3 +253,34 @@
     });
 
 })(jQuery);
+//Remove item in cart
+$('.icon_close').on('click', function (e) {
+    const formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+    var $element = $(this)
+    var productCode = $(this).data('id');
+    $.post({
+        url: '/gio-hang/cap-nhat',
+        data: {
+            'productCode': productCode,
+            'quantity': 0
+        },
+        success: function (data) {
+            console.log('Delete item in cart')
+            $element.closest("tr").remove();
+            $('#total').text(formatter.format(data.new_total))
+            $('#discount').text(formatter.format(data.new_discount))
+            $('#amount').text(formatter.format((data.new_total - data.new_discount)))
+            $('#cart-size').text(parseInt(data.new_quantity))
+        },
+        error: function () {
+            iziToast.warning({
+                title: 'Thất bại',
+                message: 'Cập nhật số lượng không thành công',
+                position: 'topRight'
+            });
+        }
+    })
+})

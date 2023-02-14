@@ -6,8 +6,8 @@ import com.webapp.tdastore.entities.Category;
 import com.webapp.tdastore.entities.Product;
 import com.webapp.tdastore.entities.ProductImage;
 import com.webapp.tdastore.entities.ProductType;
-import com.webapp.tdastore.services.CategoryServices;
-import com.webapp.tdastore.services.ProductServices;
+import com.webapp.tdastore.services.CategoryService;
+import com.webapp.tdastore.services.ProductService;
 import com.webapp.tdastore.services.ProductTypeService;
 import com.webapp.tdastore.services.UploadImageService;
 import org.modelmapper.ModelMapper;
@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/san-pham")
 public class ProductAdmin {
     @Autowired
-    private ProductServices productServices;
+    private ProductService productService;
     @Autowired
-    private CategoryServices categoryServices;
+    private CategoryService categoryService;
     @Autowired
     private UploadImageService imageService;
 
@@ -51,12 +51,12 @@ public class ProductAdmin {
                                 ModelMap modelMap) {
         //handle data from parameter
         page = page == null ? page = 0 : page--;
-        long pageNum = productServices.getCountProduct() / NO_PRODUCT;
+        long pageNum = productService.getCountProduct() / NO_PRODUCT;
         if (pageNum % NO_PRODUCT != 0)
             pageNum++;
         //Get data from database
-        List<Product> products = productServices.findQuery(categoryId, status, page, NO_PRODUCT);
-        List<Category> categories = categoryServices.getAll();
+        List<Product> products = productService.findQuery(categoryId, status, page, NO_PRODUCT);
+        List<Category> categories = categoryService.getAll();
 
         modelMap.addAttribute("queryId", categoryId);
         modelMap.addAttribute("page", page);
@@ -72,9 +72,9 @@ public class ProductAdmin {
                                 @RequestParam("keyword") String keyword,
                                 ModelMap modelMap) {
         List<Product> products = type == 1 ?
-                productServices.findByKeyword(keyword) :
-                productServices.listProductByCode(keyword);
-        List<Category> categories = categoryServices.getAll();
+                productService.findByKeyword(keyword) :
+                productService.listProductByCode(keyword);
+        List<Category> categories = categoryService.getAll();
         modelMap.addAttribute("categories", categories);
         modelMap.addAttribute("products", products);
         modelMap.addAttribute("queryId", 0);
@@ -90,7 +90,7 @@ public class ProductAdmin {
     @RequestMapping(value = "/them", method = RequestMethod.GET)
     public String getCreateProductPage(ModelMap modelMap) {
         ProductDTO dto = new ProductDTO();
-        List<Category> categories = categoryServices.getAll();
+        List<Category> categories = categoryService.getAll();
         modelMap.addAttribute("categories", categories);
         modelMap.addAttribute("dto", dto);
         return "admin/product-form";
@@ -115,7 +115,7 @@ public class ProductAdmin {
             product.setImages(images);
         }
         //save product into db
-        String code = productServices.insert(product);
+        String code = productService.insert(product);
         return "redirect:/admin/san-pham/" + code;
 
     }
@@ -123,9 +123,9 @@ public class ProductAdmin {
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
     public String viewProductData(@PathVariable String code,
                                   ModelMap modelMap) {
-        Product p = productServices.findProductByCode(code);
+        Product p = productService.findProductByCode(code);
         if (p != null) {
-            List<Category> categories = categoryServices.getAll();
+            List<Category> categories = categoryService.getAll();
 
             ProductDTO dto = modelMapper.map(p, ProductDTO.class);
             modelMap.addAttribute("dto", dto);
@@ -138,7 +138,7 @@ public class ProductAdmin {
 
     @RequestMapping(value = "/them-style", method = RequestMethod.POST)
     public ResponseEntity addNewStyle(@Valid @ModelAttribute ProductTypeDTO dto) {
-        Product p = productServices.findProductByCode(dto.getProductCode());
+        Product p = productService.findProductByCode(dto.getProductCode());
         if (p != null) {
             ProductType type = modelMapper.map(dto, ProductType.class);
             if (dto.getSpecialPrice() == null) {
@@ -153,10 +153,10 @@ public class ProductAdmin {
 
     @RequestMapping(value = "/chinh-sua/{code}", method = RequestMethod.GET)
     public String getUpdateProduct(@PathVariable String code, ModelMap modelMap) {
-        Product p = productServices.findProductByCode(code);
+        Product p = productService.findProductByCode(code);
         if (p != null) {
             ProductDTO dto = modelMapper.map(p, ProductDTO.class);
-            List<Category> categories = categoryServices.getAll();
+            List<Category> categories = categoryService.getAll();
             List<ProductType> options = dto.getProductType()
                     .stream().filter(t -> t.isDeleted() != true).collect(Collectors.toList());
             modelMap.addAttribute("options", options);
@@ -171,15 +171,15 @@ public class ProductAdmin {
     public String updateProduct(@Valid @ModelAttribute ProductDTO dto,
                                         ModelMap modelMap) {
         Product product = modelMapper.map(dto, Product.class);
-        productServices.update(product);
+        productService.update(product);
         return "redirect:/admin/san-pham/" + product.getProductCode();
     }
 
     @RequestMapping(value = "/xoa", method = RequestMethod.POST)
     public ResponseEntity deleteProduct(@RequestParam String productCode) {
-        Product product = productServices.findProductByCode(productCode);
+        Product product = productService.findProductByCode(productCode);
         if (product != null) {
-            productServices.disableProduct(product);
+            productService.disableProduct(product);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Delete product success");
         }

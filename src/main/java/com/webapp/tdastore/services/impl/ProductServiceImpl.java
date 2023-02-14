@@ -3,7 +3,7 @@ package com.webapp.tdastore.services.impl;
 import com.webapp.tdastore.entities.Product;
 import com.webapp.tdastore.entities.generator.GeneratorCode;
 import com.webapp.tdastore.repositories.ProductRepos;
-import com.webapp.tdastore.services.ProductServices;
+import com.webapp.tdastore.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductServices {
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepos productRepos;
@@ -25,6 +25,21 @@ public class ProductServiceImpl implements ProductServices {
     @Override
     public List<Product> findAll(int page, int number) {
         return productRepos.findAll(PageRequest.of(page, number)).getContent();
+    }
+
+    @Override
+    public List<Product> findNewProduct(int page, int number) {
+        return productRepos.findAllByOrderByCreateDateDesc(PageRequest.of(page, number));
+    }
+
+    @Override
+    public List<Product> findHotProduct(int page, int number) {
+        return productRepos.findAllByOrderByCreateDateDesc(PageRequest.of(page, number));
+    }
+
+    @Override
+    public List<Product> findHotTrend(int page, int number) {
+        return productRepos.findAllByOrderByCreateDateDesc(PageRequest.of(page, number));
     }
 
     @Override
@@ -91,5 +106,10 @@ public class ProductServiceImpl implements ProductServices {
         product.setStatus(-1);
         product.setUpdateDate(new Timestamp(new Date().getTime()));
         productRepos.save(product);
+    }
+
+    @Override
+    public List<Product> findByCategoryCode(String code,int page) {
+        return productRepos.findProductByCategoryCode(code, PageRequest.of(page, 9));
     }
 }

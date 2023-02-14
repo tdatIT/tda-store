@@ -3,7 +3,7 @@ package com.webapp.tdastore.controller.admin;
 import com.cloudinary.Cloudinary;
 import com.webapp.tdastore.dto.CategoryDTO;
 import com.webapp.tdastore.entities.Category;
-import com.webapp.tdastore.services.CategoryServices;
+import com.webapp.tdastore.services.CategoryService;
 import com.webapp.tdastore.services.UploadImageService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/admin/doanh-muc")
 public class CategoryAdmin {
     @Autowired
-    private CategoryServices categoryServices;
+    private CategoryService categoryService;
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
@@ -32,14 +32,14 @@ public class CategoryAdmin {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String showListCategory(@RequestParam(value = "page", required = false) String pageParam,
                                    ModelMap modelMap) {
-        long total = categoryServices.getTotal();
+        long total = categoryService.getTotal();
         long numPage = total / 5;
         numPage = total % 5 != 0 ? numPage++ : numPage;     //increase number page if mod 5 !=0
         int page = pageParam != null ? (Integer.parseInt(pageParam)) : 0;
         if (page != 0)
             page--;//decrease if page != 0
 
-        List<Category> categories = categoryServices.getAllPaging(page);
+        List<Category> categories = categoryService.getAllPaging(page);
         modelMap.addAttribute("page", page);
         modelMap.addAttribute("numPage", numPage);
         modelMap.addAttribute("categories", categories);
@@ -60,14 +60,14 @@ public class CategoryAdmin {
         if (dto.getImage() != null) {
             category.setImages(uploadService.uploadFile(dto.getImage()));
         }
-        categoryServices.insert(category);
+        categoryService.insert(category);
         return "redirect:/admin/doanh-muc";
     }
 
     @RequestMapping(value = "chinh-sua", method = RequestMethod.GET)
     public String viewEditCategory(@RequestParam("id") long categoryId,
                                    ModelMap modelMap) {
-        Category category = categoryServices.findById(categoryId);
+        Category category = categoryService.findById(categoryId);
         if (category != null) {
             CategoryDTO dto = mapper.map(category, CategoryDTO.class);
             modelMap.addAttribute("dto", dto);
@@ -81,14 +81,14 @@ public class CategoryAdmin {
         Category category = mapper.map(dto, Category.class);
         if (dto.getImage() != null) {
             //Get old image delete and update new image
-            Category old = categoryServices.findById(category.getCategoryId());
+            Category old = categoryService.findById(category.getCategoryId());
             if (old.getImages() != null) {
                 uploadService.removeFile(old.getImages());
             }
             //upload and set new image for object
             category.setImages(uploadService.uploadFile(dto.getImage()));
         }
-        categoryServices.update(category);
+        categoryService.update(category);
         return "redirect:/admin/doanh-muc";
     }
 }

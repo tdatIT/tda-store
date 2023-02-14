@@ -76,3 +76,49 @@ $('#remove-product').click(function (e) {
         }
     });
 })
+$('.add-to-cart').on('click', function (e) {
+    var productCode = $(this).data('id');
+    $.ajax({
+        url: '/gio-hang/them',
+        method: 'post',
+        data: {
+            'code': productCode
+        },
+        success: function (data) {
+            $('#cart-size').text(
+                parseInt($('#cart-size').text()) + 1)
+            iziToast.success({
+                title: 'Thành công',
+                message: 'Đã thêm sản phẩm vào giỏ hàng',
+                position: 'topRight'
+            });
+        }
+    })
+})
+$('.favourite-btn').on('click', function (e) {
+    var productCode = $(this).data('id');
+    $.ajax({
+        url: '/yeu-thich/them',
+        method: 'post',
+        data: {
+            'productCode': productCode,
+        },
+        success: function () {
+            iziToast.success({
+                title: 'Thành công',
+                message: 'Đã thêm vào doanh mục yêu thích',
+                position: 'topRight'
+            })
+        }
+    })
+})
+//Get cart size when load dom
+$(document).ready(function () {
+    $.ajax({
+        url: '/gio-hang/so-luong',
+        method: 'get',
+        success: function (data) {
+            $("#cart-size").text(parseInt(data))
+        }
+    })
+})

@@ -34,9 +34,12 @@ public class Category {
     private Timestamp updateDate;
 
     @Column
+    private String code;
+
+    @Column
     private boolean status;
 
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     private List<Product> product;
 
 }

@@ -49,6 +49,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
+    @OneToMany(mappedBy = "user")
+    private List<Favourite> favourites;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

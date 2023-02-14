@@ -4,7 +4,7 @@ import com.webapp.tdastore.entities.Category;
 
 import java.util.List;
 
-public interface CategoryServices {
+public interface CategoryService {
     List<Category> getAll();
 
     List<Category> getAllPaging(int page);
