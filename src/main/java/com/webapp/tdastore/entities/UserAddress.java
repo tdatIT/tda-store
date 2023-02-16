@@ -1,7 +1,9 @@
 package com.webapp.tdastore.entities;
 
+import com.webapp.tdastore.payload.ProvinceAPI;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.*;
 
@@ -38,4 +40,16 @@ public class UserAddress {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public String getAPIName() {
+        String url_province = "https://provinces.open-api.vn/api/p/" + province;
+        String url_district = "https://provinces.open-api.vn/api/d/" + district;
+        String url_ward = "https://provinces.open-api.vn/api/w/" + ward;
+        //call api and mapping to object
+        RestTemplate apiCall = new RestTemplate();
+        ProvinceAPI province_data = apiCall.getForObject(url_province, ProvinceAPI.class);
+        ProvinceAPI district_data = apiCall.getForObject(url_district, ProvinceAPI.class);
+        ProvinceAPI ward_data = apiCall.getForObject(url_ward, ProvinceAPI.class);
+        return province_data.getName() + " - " + district_data.getName() + " - " + ward_data.getName();
+    }
 }

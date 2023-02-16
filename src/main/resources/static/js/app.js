@@ -109,6 +109,13 @@ $('.favourite-btn').on('click', function (e) {
                 message: 'Đã thêm vào doanh mục yêu thích',
                 position: 'topRight'
             })
+        },
+        error: function (){
+            iziToast.error({
+                title:'Thất bại',
+                message:'Vui lòng đăng nhập tài khoản',
+                position:'topRight'
+            })
         }
     })
 })

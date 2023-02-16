@@ -1,8 +1,7 @@
 package com.webapp.tdastore.entities;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.webapp.tdastore.repositories.ItemShoppingCartRepos;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,10 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,9 +21,12 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 public class ShoppingCart {
-    static final Logger logger = LoggerFactory.getLogger("ShoppingCart");
+
     @Autowired
-    private HttpServletResponse responseContext;
+    private ItemShoppingCartRepos cartRepos;
+
+    static final Logger logger = LoggerFactory.getLogger("ShoppingCart");
+
     private Map<String, CartItems> cart = new HashMap<String, CartItems>();
 
     public Collection<CartItems> getCartItems() {
@@ -64,22 +62,8 @@ public class ShoppingCart {
     public double getDiscountValue() {
         return cart.values().stream()
                 .mapToDouble(t ->
-                        t.getProduct().getPromotionPrice() > 0 ?
-                                t.getProduct().getPromotionPrice() : t.getProduct().getPrice() * t.getQuantity())
+                        (t.getProduct().getPromotionPrice() > 0 ?
+                                t.getProduct().getPromotionPrice() : t.getProduct().getPrice()) * t.getQuantity())
                 .sum();
-    }
-
-    @PostConstruct
-    public void initCart() {
-        logger.info("Init shopping cart - Load data from cookie");
-    }
-
-
-    //Write cookie when close app
-    @PreDestroy
-    public void setCookie() throws JsonProcessingException {
-        logger.info("Write data into cookie");
-        ObjectMapper mapper = new ObjectMapper();
-        responseContext.addCookie(new Cookie("cart-item", mapper.writeValueAsString(cart)));
     }
 }
