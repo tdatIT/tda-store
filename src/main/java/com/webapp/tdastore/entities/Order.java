@@ -5,7 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "orders")
 @Entity
@@ -50,8 +51,8 @@ public class Order {
     @JoinColumn(name = "voucher_code")
     private Voucher voucher;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderItems> items;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItems> items = new ArrayList<>();
 
 
     //const for payment method
@@ -63,5 +64,6 @@ public class Order {
     public static final int PROCESSING_STATUS = 2;
     public static final int COMPLETE_STATUS = 3;
     public static final int CANCEL_STATUS = 4;
+    public static final int CHECK_STATUS = 0;
 
 }

@@ -87,7 +87,9 @@ public class UserServiceImpl implements UserService {
         user.setRole(role);
         //set default address
         UserAddress default_add = dto.getDefaultAddress();
+        default_add.setPhone(user.getPhone());
         default_add.setUser(user);
+        default_add.setDetail(dto.getAddress_detail());
         user.setAddress(new ArrayList<>());
         user.getAddress().add(default_add);
         return userRepos.save(user);

@@ -9,10 +9,9 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 public class OrderItems {
     @EmbeddedId
-    private OrderItemKey id;
+    private OrderItemKey id = new OrderItemKey();
 
     @ManyToOne
     @MapsId("productId")

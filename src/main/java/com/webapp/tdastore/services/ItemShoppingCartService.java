@@ -19,4 +19,6 @@ public interface ItemShoppingCartService {
 
     void updateQuantity(long userId, String productCode, int quantity);
 
+    void clear(long userId);
+
 }

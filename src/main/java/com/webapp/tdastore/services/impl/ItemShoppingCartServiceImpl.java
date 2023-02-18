@@ -95,4 +95,12 @@ public class ItemShoppingCartServiceImpl implements ItemShoppingCartService {
                 cartRepos.delete(item);
         }
     }
+
+    @Override
+    public void clear(long userId) {
+        List<ItemShoppingCart> item = findAllByUserId(userId);
+        item.stream().forEach(t -> {
+            cartRepos.delete(t);
+        });
+    }
 }

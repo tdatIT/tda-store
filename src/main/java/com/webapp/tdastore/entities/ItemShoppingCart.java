@@ -1,6 +1,5 @@
 package com.webapp.tdastore.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,4 +24,7 @@ public class ItemShoppingCart {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public double getAmount() {
+        return quantity * (product.getPromotionPrice() > 0 ? product.getPromotionPrice() : product.getPrice());
+    }
 }

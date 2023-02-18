@@ -14,9 +14,6 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 public class OrderItemKey implements Serializable {
-    @Column(name = "order_id")
     private long orderId;
-
-    @Column(name = "product_id")
     private long productId;
 }
