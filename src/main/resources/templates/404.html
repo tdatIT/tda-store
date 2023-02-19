@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Xác thực tài khoản thành công</title>
+    <title>Không tìm thấy nội dung </title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="/modules/bootstrap/css/bootstrap.min.css">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/components.css">
     <!-- Start GA -->
-    <link rel="icon" type="image/x-icon" href="/img/TDA-logo.png">
+
 </head>
 
 <body>
@@ -28,15 +28,16 @@
                         <img src="/img/TDA-logo.png" alt="logo" width="100" class="shadow-light rounded-circle">
                     </div>
                     <div class="card card-primary">
-                        <div class="card-header"><h4>Thông báo hệ thống</h4></div>
+                        <div class="card-header"><h4>Lỗi 404</h4></div>
                         <div class="card-body">
                             <div class="col-12 mb-4">
-                                <div class="hero align-items-center bg-info text-white">
+                                <div class="hero align-items-center bg-danger text-white">
                                     <div class="hero-inner text-center">
-                                        <h2>Thông báo</h2>
-                                        <p class="lead" th:text="${msg}"></p>
+                                        <h2>Xảy ra lỗi</h2>
+                                        <p class="lead">Tài nguyên yêu cầu không tồn tại ...</p>
                                         <div class="mt-4">
-                                            <a th:href="@{${link}}" class="btn btn-outline-white btn-lg btn-icon icon-left"><i
+                                            <a href="/trang-chu"
+                                               class="btn btn-outline-white btn-lg btn-icon icon-left"><i
                                                     class="fas fa-sign-in-alt"></i>Trang chủ</a>
                                         </div>
                                     </div>

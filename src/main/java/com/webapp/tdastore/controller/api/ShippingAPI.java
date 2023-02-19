@@ -17,7 +17,7 @@ public class ShippingAPI {
     @Autowired
     private ShippingService shippingService;
 
-    @RequestMapping(value = "/api/v1/shipping-calculate", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/v1/shipping-calculate", method = RequestMethod.POST)
     public ShippingResponse calculateShipping(@RequestBody @Valid ShippingRequest request,
                                               BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

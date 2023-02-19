@@ -229,8 +229,8 @@
             success: function (data) {
                 $button.parent().find('input').val(newVal);
                 $('#total').text(formatter.format(data.new_total))
-                $('#discount').text(formatter.format(data.new_discount))
-                $('#amount').text(formatter.format((data.new_total - data.new_discount)))
+                $('#discount').text(formatter.format(data.new_total - data.new_discount))
+                $('#amount').text(formatter.format((data.new_discount)))
                 $("#cart-size").text(parseInt(data.new_quantity))
             },
             error: function () {
